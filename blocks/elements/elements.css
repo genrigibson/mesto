@@ -1,0 +1,9 @@
+.elements {
+    display: grid;
+    width: 68.75%;
+    margin: 0 auto 5.25%;
+    padding: 0;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 17px;
+}

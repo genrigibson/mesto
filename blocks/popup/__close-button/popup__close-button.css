@@ -1,0 +1,5 @@
+.popup__close-button {
+    border: none;
+    opacity: 0.6;
+    z-index: 2;
+}
