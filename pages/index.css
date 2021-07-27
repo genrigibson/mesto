@@ -11,6 +11,7 @@
 @import url("../blocks/profile/__speciality/profile__speciality.css");
 @import url("../blocks/profile/__edit/profile__edit.css");
 @import url("../blocks/profile/__add/profile__add.css");
+@import url("../blocks/profile/__item/profile__item.css");
 @import url("../blocks/elements/elements.css");
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__text/footer__text.css");

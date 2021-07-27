@@ -1,10 +1,9 @@
 .profile__add {
     width: 17.2%;
-    margin: 0 0 0 27.8%;
+    margin: 0;
     padding: 1.6% 7.3%;
     border: 2px solid #FFFFFF;
     box-sizing: border-box;
     border-radius: 2px;
     background-color: #000000;
-    align-self: center;
 }
