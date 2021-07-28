@@ -94,15 +94,14 @@
         </footer>
     </div>
     <section class="popup">
-        <article class="popup__container">
-            <button class="popup__close-button"><img class="popup__close-icon" alt="закрыть окно" src="./images/Close Icon.png"></button>
-            <div class=" popup__form">
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" class="popup__text">
-                <input type="text" class="popup__text">
-                <input type="button" value="Сохранить" class="popup__button"></div>
-        </article>
+        <button type="button" class="popup__close"></button>
+        <div class="popup__content">
+            <h2 class="popup__header">Редактировать профиль</h2>
+            <input type="text" class="popup__field popup__name">
+            <input type="text" class="popup__field popup__specialty">
+            <button type="button" class="popup__save-button"><p class="popup__save-button_text">Сохранить</p></button>
+        </div>
     </section>
+    <script src="/pages/index.js"></script>
 </body>
-
-</html>
+< /html>

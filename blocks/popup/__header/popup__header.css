@@ -1,0 +1,10 @@
+.popup__header {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    width: 330px;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    margin: 0;
+}
