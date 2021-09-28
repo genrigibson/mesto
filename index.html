@@ -13,28 +13,23 @@
         <img
           src="./images/Vector.png"
           alt="место_логотип"
-          class="header__logo"
-        >
+          class="header__logo">
       </header>
       <main>
         <section class="profile">
           <img
             src="./images/avatar-photo.png"
             alt="аватар пользователя"
-            class="profile__avatar-img"
-          >
+            class="profile__avatar-img">
           <div class="profile__info">
-            <h1 class="profile__info-title">Жак-Ив Кусто</h1>
-            <p class="profile__info-subtitle">Исследователь океана</p>
+            <h1 class="profile__info-title" id='nameInfo'>Жак-Ив Кусто</h1>
+            <p class="profile__info-subtitle" id='jobInfo'>Исследователь океана</p>
           </div>
           <button
             type="button"
-            class="profile__info-button"
-            id="edit-info"
-          ></button>
+            class="profile__info-button"></button>
           <button type="button" class="profile__button"></button>
         </section>
-
         <section class="gallery page__gallery">
            <div class="gallery__item">
             <img src="./images/kirill-pershin-1088404-unsplash.png" alt="фото в галерее" class="gallery__item-img">
@@ -50,7 +45,6 @@
               <button type="button" class="gallery__description-img"></button>
             </div>
           </div>
-
           <div class="gallery__item">
             <img src="./images/kirill-pershin-1556355-unsplash.png" alt="фото в галерее" class="gallery__item-img">
             <div class="gallery__description">
@@ -80,21 +74,20 @@
             </div>
           </div>
         </section>
-        <div class="popup" id="edit">
-          <div class="popup__container">
-            <h2 class="popup__profile">Редактировать профиль</h2>
-            <form name="profileForm" class="popup__container-item">
-              <input name="popupTitle" type="text" class="popup__input">
-              <input name="popupSubtitle" type="text" class="popup__input">
-              <button type="submit" class="popup__button">Сохранить</button>
-            </form>
-
-            <button type="button" class="popup__close"></button>
-          </div>
-        </div>
       <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
+      <div class="popup">
+        <div class="popup__container">
+          <h2 class="popup__profile">Редактировать профиль</h2>
+          <form id="profileForm" class="popup__container-item">
+            <input id="nameInput" type="text" class="popup__input">
+            <input id="jobInput" type="text" class="popup__input">
+            <button type="submit" class="popup__button">Сохранить</button>
+          </form>
+          <button type="button" class="popup__close"></button>
+        </div>
+      </div>
     </div>
     <script src="./pages/index.js"></script>
   </body>
