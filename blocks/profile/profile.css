@@ -10,8 +10,6 @@
 }
 @media screen and (max-width: 910px) {
   .profile {
-    max-width: 580px;
-    grid-template-columns: 150px 316px 265px;
     grid-template-rows: 140px 115px;
     text-align: center;
     max-width: 582px;

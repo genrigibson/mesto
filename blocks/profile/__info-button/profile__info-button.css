@@ -4,20 +4,17 @@
   background: #000;
   color: #fff;
   box-sizing: border-box;
-  border: none;
+  border: 1px solid #FFFFFF;
   padding: 7px;
   margin-bottom: 23px;
   background-image: url(../../../images/редактировать\ профиль.png);
   background-repeat: no-repeat;
   background-position: center;
-  border: 1px solid #FFFFFF;
 }
 .profile__info-button:hover {
   opacity: 0.5;
   cursor: pointer;
 }
-
-
 @media screen and (max-width: 620px) {
   .profile__info-button {
     grid-column-start: 3;
