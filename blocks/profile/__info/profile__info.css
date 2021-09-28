@@ -1,11 +1,12 @@
-.profile__info {
-    margin: 0 0 0 -25%;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 38.2%;
-    justify-self: flex-start;
-    list-style: none;
-    align-self: center;
+@media screen and (max-width: 620px) {
+  .profile__info {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+  }
+}
+@media screen and (max-width: 400px) {
+  .profile__info {
+    margin-top: 10px;
+  }
 }
