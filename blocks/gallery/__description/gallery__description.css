@@ -1,7 +1,7 @@
 .gallery__description {
-  margin: 0 auto;
+  margin: auto;
   max-width: 246px;
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
 }

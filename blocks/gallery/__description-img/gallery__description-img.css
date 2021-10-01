@@ -4,7 +4,9 @@
   height: 19px;
   background-repeat: no-repeat;
   border: none;
-  padding-bottom: 24px;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding-top: 10%;
 }
 
 .gallery__description-img:hover {
