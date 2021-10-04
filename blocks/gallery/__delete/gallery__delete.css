@@ -1,0 +1,17 @@
+.gallery__delete {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 19px;
+  height: 19px;
+  background: url('../../../images/значок\ удаления.png');
+  background-repeat: no-repeat;
+  border: none;
+  padding-bottom: 24px;
+}
+
+.gallery__delete:hover {
+  opacity: 0.5;
+  cursor: pointer;
+  outline: none;
+}
