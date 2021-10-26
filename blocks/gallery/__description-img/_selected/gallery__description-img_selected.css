@@ -1,3 +1,4 @@
 .gallery__description-img_selected {
   background: url('../../../../images/лайк_активный.png');
+  background-repeat: no-repeat;
 }
