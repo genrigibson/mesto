@@ -1,4 +1,4 @@
-const profilePopup = document.querySelector('.profile_popup');
+const profilePopup = document.querySelector('.profilepopup');
 const popUpOpenBtn = document.querySelector('.profile__info-button');
 const openCrdBtn = document.querySelector('.profile__button');
 const cardsEl = document.querySelector('.cards');
