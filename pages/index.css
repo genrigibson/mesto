@@ -30,5 +30,6 @@
 @import url('../blocks/gallery/__description-img/_selected/gallery__description-img_selected.css');
 @import url('../blocks/gallery/__delete/gallery__delete.css');
 @import url('../blocks/popup/__image/__container/image__container.css');
-@import url('../blocks/popup/__text/popup__text.css');
 @import url('../blocks/popup/__image/popup__image.css');
+@import url('../blocks/popup/__text/popup__text.css');
+

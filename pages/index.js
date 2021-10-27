@@ -1,4 +1,4 @@
-const popUp = document.querySelector('.popup');
+const profilePopup = document.querySelector('.profile_popup');
 const popUpOpenBtn = document.querySelector('.profile__info-button');
 const openCrdBtn = document.querySelector('.profile__button');
 const cardsEl = document.querySelector('.cards');
@@ -92,7 +92,7 @@ function closePopup(popup) {
 popUpOpenBtn.addEventListener("click", function () {
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
-  openPopup(popUp);
+  openPopup(profilePopup);
 });
 openCrdBtn.addEventListener("click", function () {
   openPopup(cardsEl);
