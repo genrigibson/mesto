@@ -110,7 +110,7 @@ function profileFormSubmitHandler(evt) {
   const about = jobInput.value;
   nameInfo.textContent = name;
   jobInfo.textContent = about;
-  closePopup(popUp);
+  closePopup(profilePopup);
 }
 formElement.addEventListener("submit", profileFormSubmitHandler);
 
