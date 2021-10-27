@@ -3,7 +3,7 @@ const popUpOpenBtn = document.querySelector('.profile__info-button');
 const openCrdBtn = document.querySelector('.profile__button');
 const cardsEl = document.querySelector('.cards');
 const cardForm = document.querySelector('#cardForm');
-const closeIcons = document.querySelectorAll(".popup__close-icon");
+const closeIcons = document.querySelectorAll(".popup__close");
 const titleInput = document.querySelector('#titleInput');
 const linkInput = document.querySelector('#linkInput');
 const formElement = document.querySelector('#profileForm');
@@ -13,6 +13,9 @@ const nameInfo = document.querySelector('#nameInfo');
 const jobInfo = document.querySelector('#jobInfo');
 const cardTemplate = document.querySelector("#gallery").content;
 const cardContainer = document.querySelector(".gallery");
+const popupImage = document.querySelector(".image");
+const popupImageImg = document.querySelector(".popup__image");
+const popupImageText = document.querySelector(".popup__text");
 
 const initialCards = [
   {
@@ -54,9 +57,9 @@ function createCard(text, img) {
   cardImage.alt = text;
 
   cardImage.addEventListener("click", function () {
-    openPopup(popupElement);
-    elementPopupImage.src = cardImage.src;
-    elementPopupText.textContent = cardText.textContent;
+    openPopup(popupImage);
+    popupImageImg.src = cardImage.src;
+    popupImageText.textContent = cardText.textContent;
   });
 
   cardLike.addEventListener("click", function () {
