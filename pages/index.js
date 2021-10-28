@@ -1,3 +1,4 @@
+init();
 const profilePopup = document.querySelector('.profilepopup');
 const popUpOpenBtn = document.querySelector('.profile__info-button');
 const openCrdBtn = document.querySelector('.profile__button');
@@ -88,6 +89,25 @@ function openPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.toggle("popup_opened");
+}
+function init(){
+  const forms = [...document.querySelectorAll('.popup__container-item')];
+  forms.forEach((form) => {
+    const inputs = [...form.querySelectorAll('.popup__input')];
+    inputs.forEach((input) => {
+      input.addEventListener('input', (event) => {
+        const element = event.target;
+        const errorContainer = document.querySelector(`#${element.id}-error`);
+        errorContainer.textContent = element.validationMessage;
+        if (element.validity.valid){
+          element.classList.remove('popup__input_state_invalid');
+        } else {
+          element.classList.add('popup__input_state_invalid');
+        }
+      });
+
+    })
+  })
 }
 popUpOpenBtn.addEventListener("click", function () {
   nameInput.value = nameInfo.textContent;
