@@ -85,30 +85,88 @@ initialCards.forEach((item) => {
 
 function openPopup(popup) {
   popup.classList.toggle("popup_opened");
+  document.addEventListener('keyup', closePopupEsc);
+  document.addEventListener('click', closePopupMouse)
 }
 
 function closePopup(popup) {
   popup.classList.toggle("popup_opened");
+  document.removeEventListener('keyup', closePopupEsc);
+  document.removeEventListener('click', closePopupMouse);
 }
+const closePopupEsc = (event) => {
+  event.preventDefault();
+  const activePopup = document.querySelector('.popup_opened');
+  if (event.key === 'Escape') {
+    closePopup(activePopup);
+  }
+};
+const closePopupMouse = (event) => {
+  event.preventDefault();
+  const activePopup = document.querySelector('.popup_opened');
+  const target = event.target;
+  if (target === activePopup) {
+    closePopup(activePopup);
+  }
+};
 function init(){
   const forms = [...document.querySelectorAll('.popup__container-item')];
   forms.forEach((form) => {
-    const inputs = [...form.querySelectorAll('.popup__input')];
-    inputs.forEach((input) => {
-      input.addEventListener('input', (event) => {
-        const element = event.target;
-        const errorContainer = document.querySelector(`#${element.id}-error`);
-        errorContainer.textContent = element.validationMessage;
-        if (element.validity.valid){
-          element.classList.remove('popup__input_state_invalid');
-        } else {
-          element.classList.add('popup__input_state_invalid');
-        }
-      });
-
-    })
+    addListenerstoForms(form);
   })
 }
+function addListenerstoForms(form) {
+  const inputs = [...form.querySelectorAll('.popup__input')];
+  inputs.forEach((input) => {
+    addListenerstoInput(input);
+  });
+  form.addEventListener('submit', handleSubmit);
+  form.addEventListener('input', handleFromInput);
+  setSubmitButtonState(form);
+}
+function handleFromInput(event) {
+  const {currentTarget: form} = event;
+  setSubmitButtonState(form);
+}
+function setSubmitButtonState(form){
+  const button = form.querySelector('.popup__button');
+  button.disabled = !form.checkValidity();
+  button.classList.toggle('popup__button_invalid', !form.checkValidity());
+}
+function handleSubmit(event) {
+  event.preventDefault();
+  const {target: form} = event;
+  const data = form.querySelectorAll('popup__input').reduce(
+    (sum,input) => ({
+      ...sum,
+      [input.name]: input.value,
+    }),
+    {},
+  );
+}
+function  addListenerstoInput(input) {
+  input.addEventListener('input', handleFieldValidation);
+}
+function handleFieldValidation(event) {
+  const element = event.target;
+  element.setCustomValidity('');
+  const errorContainer = document.querySelector(`#${element.id}-error`);
+  if (element.validity.valueMissing) {
+    element.setCustomValidity('Вы пропустили это поле.');
+  }
+  if (element.type === 'url' && element.validity.patternMismatch) {
+    element.setCustomValidity('Введите адрес сайта.');
+  }
+  errorContainer.textContent = element.validationMessage;
+  if (element.validity.valid){
+    element.classList.remove('popup__input_state_invalid');
+  } else {
+    element.classList.add('popup__input_state_invalid');
+  }
+
+
+}
+
 popUpOpenBtn.addEventListener("click", function () {
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;

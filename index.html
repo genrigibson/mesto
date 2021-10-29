@@ -40,13 +40,13 @@
         <div class="popup__container">
           <h2 class="popup__profile">Редактировать профиль</h2>
           <form id="profileForm" class="popup__container-item" name="profileForm" novalidate>
-            <input id="nameInput" type="text" class="popup__input" name="nameInput" required
+            <input id="nameInput" class="popup__input" name="nameInput" required
                    type="text"
                    minlength="2"
                    maxlength="40"
                    autocomplete="off">
             <span id="nameInput-error" class="error"></span>
-            <input id="jobInput" type="text" class="popup__input" name="jobInput" required
+            <input id="jobInput" class="popup__input" name="jobInput" required
                    type="text"
                    minlength="2"
                    maxlength="200"
@@ -62,13 +62,13 @@
       <div class="popup__container">
         <h2 class="popup__profile">Новое место</h2>
         <form id="cardForm" class="popup__container-item" name="cardForm" novalidate>
-          <input id="titleInput" type="text" class="popup__input" placeholder="Название" name="titleInput" required
+          <input id="titleInput" class="popup__input" placeholder="Название" name="titleInput" required
                  type="text"
                  minlength="2"
                  maxlength="30"
                  autocomplete="off">
           <span id="titleInput-error" class="error"></span>
-          <input id="linkInput" type="text" class="popup__input" placeholder="Ссылка на картинку" name="linkInput" required
+          <input id="linkInput" class="popup__input" placeholder="Ссылка на картинку" name="linkInput" required
                  autocomplete="off"
                  type="url">
           <span id="linkInput-error" class="error"></span>
@@ -95,5 +95,6 @@
       </article>
     </template>
     <script src="./pages/index.js"></script>
+    <script src="./pages/validate.js"></script>
   </body>
 </html>
