@@ -109,23 +109,47 @@ const closePopupMouse = (event) => {
     closePopup(activePopup);
   }
 };
+function profileFormSubmitHandler(evt) {
+  evt.preventDefault();
+  const name = nameInput.value;
+  const about = jobInput.value;
+  nameInfo.textContent = name;
+  jobInfo.textContent = about;
+  closePopup(profilePopup);
+}
+function cardPopupFormSubmit(evt) {
+  evt.preventDefault();
+  const cardName = titleInput.value;
+  const cardLink = linkInput.value;
+  renderCard(cardName, cardLink);
+  titleInput.value = "";
+  linkInput.value = "";
+  closePopup(cardsEl);
+}
 function init(){
   const forms = [...document.querySelectorAll('.popup__container-item')];
-  forms.forEach((form) => {
-    addListenerstoForms(form);
-  })
+  forms.forEach(addListenersToForm)
 }
-function addListenerstoForms(form) {
+function addListenersToForm(form) {
   const inputs = [...form.querySelectorAll('.popup__input')];
-  inputs.forEach((input) => {
-    addListenerstoInput(input);
-  });
+
+  inputs.forEach(addListenersToInput);
+
   form.addEventListener('submit', handleSubmit);
-  form.addEventListener('input', handleFromInput);
+  form.addEventListener('input', handleFormInput);
+
   setSubmitButtonState(form);
 }
-function handleFromInput(event) {
-  const {currentTarget: form} = event;
+function handleFormInput(event) {
+  const {
+    currentTarget: form,
+    target: {
+      validity: { valid },
+    },
+  } = event;
+
+  console.log('valid: ', valid);
+
   setSubmitButtonState(form);
 }
 function setSubmitButtonState(form){
@@ -135,38 +159,57 @@ function setSubmitButtonState(form){
 }
 function handleSubmit(event) {
   event.preventDefault();
-  const {target: form} = event;
-  const data = form.querySelectorAll('popup__input').reduce(
-    (sum,input) => ({
+
+  const { target: form } = event;
+  const data = [...form.querySelectorAll('.popup__input')].reduce(
+    (sum, input) => ({
       ...sum,
       [input.name]: input.value,
     }),
     {},
   );
+
+  console.log(data);
 }
-function  addListenerstoInput(input) {
+function addListenersToInput(input) {
   input.addEventListener('input', handleFieldValidation);
 }
 function handleFieldValidation(event) {
-  const element = event.target;
+  const { target: element } = event;
   element.setCustomValidity('');
+
   const errorContainer = document.querySelector(`#${element.id}-error`);
-  if (element.validity.valueMissing) {
-    element.setCustomValidity('Вы пропустили это поле.');
-  }
-  if (element.type === 'url' && element.validity.patternMismatch) {
-    element.setCustomValidity('Введите адрес сайта.');
-  }
+
+  validateLength(element);
+  validateRequired(element);
+  validateLink(element);
+
   errorContainer.textContent = element.validationMessage;
-  if (element.validity.valid){
-    element.classList.remove('popup__input_state_invalid');
-  } else {
-    element.classList.add('popup__input_state_invalid');
+
+  element.classList.toggle(
+    'popup__input_state_invalid',
+    !element.validity.valid,
+  );
+}
+function validateLength(inputElement) {
+  if (inputElement.validity.tooShort || inputElement.validity.tooLong) {
+    inputElement.setCustomValidity(
+      'Укажите строку больше 2 и меньше 30 символов.',
+    );
   }
-
-
 }
 
+function validateRequired(inputElement) {
+  if (inputElement.validity.valueMissing) {
+    inputElement.setCustomValidity('Вы пропустили это поле.');
+  }
+}
+
+function validateLink(inputElement) {
+  if (inputElement.type === 'url' && inputElement.validity.patternMismatch) {
+    inputElement.setCustomValidity('Введите адрес сайта');
+  }
+}
 popUpOpenBtn.addEventListener("click", function () {
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
@@ -181,26 +224,7 @@ for (const closeIcon of closeIcons) {
     closePopup(closestPopup);
   });
 }
-
-function profileFormSubmitHandler(evt) {
-  evt.preventDefault();
-  const name = nameInput.value;
-  const about = jobInput.value;
-  nameInfo.textContent = name;
-  jobInfo.textContent = about;
-  closePopup(profilePopup);
-}
 formElement.addEventListener("submit", profileFormSubmitHandler);
-
-function cardPopupFormSubmit(evt) {
-  evt.preventDefault();
-  const cardName = titleInput.value;
-  const cardLink = linkInput.value;
-  renderCard(cardName, cardLink);
-  titleInput.value = "";
-  linkInput.value = "";
-  closePopup(cardsEl);
-}
 cardForm.addEventListener("submit", cardPopupFormSubmit);
 
 
