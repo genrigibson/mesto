@@ -1,5 +1,6 @@
 init();
 const profilePopup = document.querySelector('.profilepopup');
+const popup = document.querySelector('.popup');
 const popUpOpenBtn = document.querySelector('.profile__info-button');
 const openCrdBtn = document.querySelector('.profile__button');
 const cardsEl = document.querySelector('.cards');
@@ -84,15 +85,15 @@ initialCards.forEach((item) => {
 });
 
 function openPopup(popup) {
-  popup.classList.toggle("popup_opened");
+  popup.classList.add("popup_opened");
   document.addEventListener('keyup', closePopupEsc);
-  document.addEventListener('click', closePopupMouse)
+  popup.addEventListener('click', closePopupMouse);
 }
 
 function closePopup(popup) {
-  popup.classList.toggle("popup_opened");
+  popup.classList.remove("popup_opened");
   document.removeEventListener('keyup', closePopupEsc);
-  document.removeEventListener('click', closePopupMouse);
+  popup.removeEventListener('click', closePopupMouse);
 }
 const closePopupEsc = (event) => {
   event.preventDefault();
@@ -102,13 +103,12 @@ const closePopupEsc = (event) => {
   }
 };
 const closePopupMouse = (event) => {
-  event.preventDefault();
   const activePopup = document.querySelector('.popup_opened');
-  const target = event.target;
-  if (target === activePopup) {
-    closePopup(activePopup);
-  }
+ if(event.target === event.currentTarget) {
+   closePopup(activePopup);
+ }
 };
+
 function profileFormSubmitHandler(evt) {
   evt.preventDefault();
   const name = nameInput.value;
