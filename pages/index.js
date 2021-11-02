@@ -1,4 +1,3 @@
-init();
 const profilePopup = document.querySelector('.profilepopup');
 const popup = document.querySelector('.popup');
 const popUpOpenBtn = document.querySelector('.profile__info-button');
@@ -95,6 +94,7 @@ function closePopup(popup) {
   document.removeEventListener('keyup', closePopupEsc);
   popup.removeEventListener('click', closePopupMouse);
 }
+
 const closePopupEsc = (event) => {
   event.preventDefault();
   const activePopup = document.querySelector('.popup_opened');
@@ -104,9 +104,9 @@ const closePopupEsc = (event) => {
 };
 const closePopupMouse = (event) => {
   const activePopup = document.querySelector('.popup_opened');
- if(event.target === event.currentTarget) {
-   closePopup(activePopup);
- }
+  if (event.target === event.currentTarget) {
+    closePopup(activePopup);
+  }
 };
 
 function profileFormSubmitHandler(evt) {
@@ -117,6 +117,7 @@ function profileFormSubmitHandler(evt) {
   jobInfo.textContent = about;
   closePopup(profilePopup);
 }
+
 function cardPopupFormSubmit(evt) {
   evt.preventDefault();
   const cardName = titleInput.value;
@@ -126,90 +127,7 @@ function cardPopupFormSubmit(evt) {
   linkInput.value = "";
   closePopup(cardsEl);
 }
-function init(){
-  const forms = [...document.querySelectorAll('.popup__container-item')];
-  forms.forEach(addListenersToForm)
-}
-function addListenersToForm(form) {
-  const inputs = [...form.querySelectorAll('.popup__input')];
 
-  inputs.forEach(addListenersToInput);
-
-  form.addEventListener('submit', handleSubmit);
-  form.addEventListener('input', handleFormInput);
-
-  setSubmitButtonState(form);
-}
-function handleFormInput(event) {
-  const {
-    currentTarget: form,
-    target: {
-      validity: { valid },
-    },
-  } = event;
-
-  console.log('valid: ', valid);
-
-  setSubmitButtonState(form);
-}
-function setSubmitButtonState(form){
-  const button = form.querySelector('.popup__button');
-  button.disabled = !form.checkValidity();
-  button.classList.toggle('popup__button_invalid', !form.checkValidity());
-}
-function handleSubmit(event) {
-  event.preventDefault();
-
-  const { target: form } = event;
-  const data = [...form.querySelectorAll('.popup__input')].reduce(
-    (sum, input) => ({
-      ...sum,
-      [input.name]: input.value,
-    }),
-    {},
-  );
-
-  console.log(data);
-}
-function addListenersToInput(input) {
-  input.addEventListener('input', handleFieldValidation);
-}
-function handleFieldValidation(event) {
-  const { target: element } = event;
-  element.setCustomValidity('');
-
-  const errorContainer = document.querySelector(`#${element.id}-error`);
-
-  validateLength(element);
-  validateRequired(element);
-  validateLink(element);
-
-  errorContainer.textContent = element.validationMessage;
-
-  element.classList.toggle(
-    'popup__input_state_invalid',
-    !element.validity.valid,
-  );
-}
-function validateLength(inputElement) {
-  if (inputElement.validity.tooShort || inputElement.validity.tooLong) {
-    inputElement.setCustomValidity(
-      'Укажите строку больше 2 и меньше 30 символов.',
-    );
-  }
-}
-
-function validateRequired(inputElement) {
-  if (inputElement.validity.valueMissing) {
-    inputElement.setCustomValidity('Вы пропустили это поле.');
-  }
-}
-
-function validateLink(inputElement) {
-  if (inputElement.type === 'url' && inputElement.validity.patternMismatch) {
-    inputElement.setCustomValidity('Введите адрес сайта');
-  }
-}
 popUpOpenBtn.addEventListener("click", function () {
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
