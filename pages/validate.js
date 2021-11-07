@@ -1,10 +1,17 @@
-init();
 
-function init() {
-  const forms = [...document.querySelectorAll('.popup__container-item')];
-  forms.forEach(addListenersToForm)
+const validationConfig = {
+  formSelector: ".popup__container-item",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: ".popup__button_invalid",
+  inputErrorClass: ".error",
+  errorClass: ".popup__input_state_invalid",
+};
+function enableValidation(config) {
+  const forms = [...document.querySelectorAll(config.formSelector)];
+  forms.forEach(addListenersToForm);
 }
-
+enableValidation(validationConfig);
 function addListenersToForm(form) {
   const inputs = form.querySelectorAll('.popup__input');
 
@@ -37,12 +44,7 @@ function handleSubmit(event) {
   event.preventDefault();
 
   const {target: form} = event;
-  const data = [...form.querySelectorAll('.popup__input')].reduce(
-    (sum, input) => ({
-      ...sum,
-      [input.name]: input.value,
-    }),
-  );
+
 }
 
 function addListenersToInput(input) {
