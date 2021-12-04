@@ -1,3 +1,5 @@
+import Card from './Card.js'
+import FormValidator from "./FormValidator.js"
 const profilePopup = document.querySelector('.profilepopup');
 const popup = document.querySelector('.popup');
 const popUpOpenBtn = document.querySelector('.profile__info-button');
@@ -17,8 +19,16 @@ const cardContainer = document.querySelector(".gallery");
 const popupImage = document.querySelector(".image");
 const popupImageImg = document.querySelector(".popup__image");
 const popupImageText = document.querySelector(".popup__text");
+export const validationConfig = {
+  formSelector: ".popup__container-item",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: ".popup__button_invalid",
+  inputErrorClass: ".error",
+  errorClass: ".popup__input_state_invalid",
+};
 
-const initialCards = [
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -45,45 +55,21 @@ const initialCards = [
   }
 ];
 
-
-function createCard(text, img) {
-  const card = cardTemplate.querySelector(".gallery__item").cloneNode(true);
-
-  const cardText = card.querySelector(".gallery__description-title");
-  const cardImage = card.querySelector(".gallery__item-img");
-  const cardLike = card.querySelector(".gallery__description-img");
-  const cardDeleteIcon = card.querySelector(".gallery__delete");
-  cardText.textContent = text;
-  cardImage.src = img;
-  cardImage.alt = text;
-
-  cardImage.addEventListener("click", function () {
-    openPopup(popupImage);
-    popupImageImg.src = cardImage.src;
-    popupImageText.textContent = cardText.textContent;
-  });
-
-  cardLike.addEventListener("click", function () {
-    cardLike.classList.toggle("gallery__description-img_selected");
-  });
-
-  cardDeleteIcon.addEventListener("click", function () {
-    const fullElement = cardDeleteIcon.closest(".gallery__item");
-    fullElement.remove();
-  });
-  return card;
-}
-
-function renderCard(text, img) {
-  const createdCard = createCard(text, img);
-  cardContainer.prepend(createdCard);
-}
-
 initialCards.forEach((item) => {
-  renderCard(item.name, item.link);
-});
+  const card = new Card(item, '#gallery');
+  const cardElement = card.generateCard();
 
-function openPopup(popup) {
+  cardContainer.prepend(cardElement);
+});
+function enableValidation(config) {
+  const forms = [...document.querySelectorAll(config.formSelector)];
+  forms.forEach((item) => {
+    new FormValidator(validationConfig, item);
+  });
+}
+enableValidation(validationConfig);
+
+export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keyup', closePopupEsc);
   popup.addEventListener('click', closePopupMouse);
@@ -122,7 +108,7 @@ function cardPopupFormSubmit(evt) {
   evt.preventDefault();
   const cardName = titleInput.value;
   const cardLink = linkInput.value;
-  renderCard(cardName, cardLink);
+  initialCards.push(cardName,cardLink);
   titleInput.value = "";
   linkInput.value = "";
   closePopup(cardsEl);
