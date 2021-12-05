@@ -44,8 +44,8 @@ import {openPopup} from "./index.js";
   }
   _openPopupImage() {
     openPopup();
-    this._element.src = this._element.link;
-    this._element.textContent = this._element.name;
+    this._element.src = data.link;
+    this._element.textContent = data.name;
   }
 
 }

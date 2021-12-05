@@ -11,7 +11,7 @@ export default class FormValidator {
   }
 
 
-  enableValidation() {
+  enableValidation = () => {
     this._setEventListeners();
   }
 
@@ -30,9 +30,7 @@ export default class FormValidator {
     })
 
     this._toggleButtonState();
-    this._validateLength();
-    this._validateRequired();
-    this._validateLink();
+
   }
 
 
@@ -67,24 +65,6 @@ export default class FormValidator {
     button.classList.toggle(this._inactiveButtonClass, !this._formSelector.checkValidity());
   }
 
-  _validateLength = () => {
-    if (this._element.validity.tooShort || this._element.validity.tooLong) {
-      this._element.setCustomValidity(
-        'Укажите строку больше 2 и меньше 30 символов.',
-      );
-    }
-  }
 
-  _validateRequired = () => {
-    if (this._element.validity.valueMissing) {
-      this._element.setCustomValidity('Вы пропустили это поле.');
-    }
-  }
-
-  _validateLink = () => {
-    if (this._element.type === 'url' && this._element.validity.patternMismatch) {
-      this._element.setCustomValidity('Введите адрес сайта');
-    }
-  }
 }
 

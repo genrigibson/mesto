@@ -61,10 +61,11 @@ initialCards.forEach((item) => {
 
   cardContainer.prepend(cardElement);
 });
-function enableValidation(config) {
+const enableValidation = (config) => {
   const forms = [...document.querySelectorAll(config.formSelector)];
   forms.forEach((item) => {
-    new FormValidator(validationConfig, item);
+    const validator =  new FormValidator(validationConfig, item);
+    validator.enableValidation();
   });
 }
 enableValidation(validationConfig);
