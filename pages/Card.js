@@ -1,4 +1,4 @@
-import {openPopup} from "./index.js";
+import {openPopup, popupImage, popupImageImg, popupImageText} from "./index.js";
  export default class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
@@ -43,9 +43,10 @@ import {openPopup} from "./index.js";
     this._element.remove();
   }
   _openPopupImage() {
-    openPopup();
-    this._element.src = data.link;
-    this._element.textContent = data.name;
+    openPopup(popupImage)
+    popupImageImg.src = this._link;
+    popupImageText.textContent = this._name;
+
   }
 
 }

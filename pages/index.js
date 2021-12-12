@@ -16,14 +16,14 @@ const nameInfo = document.querySelector('#nameInfo');
 const jobInfo = document.querySelector('#jobInfo');
 const cardTemplate = document.querySelector("#gallery").content;
 const cardContainer = document.querySelector(".gallery");
-const popupImage = document.querySelector(".image");
-const popupImageImg = document.querySelector(".popup__image");
-const popupImageText = document.querySelector(".popup__text");
+export const popupImage = document.querySelector(".image");
+export const popupImageImg = document.querySelector(".popup__image");
+export const popupImageText = document.querySelector(".popup__text");
 export const validationConfig = {
   formSelector: ".popup__container-item",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
-  inactiveButtonClass: ".popup__button_invalid",
+  inactiveButtonClass: "popup__button_invalid",
   inputErrorClass: ".error",
   errorClass: ".popup__input_state_invalid",
 };
@@ -55,21 +55,19 @@ export const initialCards = [
   }
 ];
 
-initialCards.forEach((item) => {
-  const card = new Card(item, '#gallery');
-  const cardElement = card.generateCard();
+const renderer = (data) => {
+  data.forEach((item) => {
+    const card = new Card(item, '#gallery');
+    const cardElement = card.generateCard();
 
-  cardContainer.prepend(cardElement);
-});
-const enableValidation = (config) => {
-  const forms = [...document.querySelectorAll(config.formSelector)];
-  forms.forEach((item) => {
-    const validator =  new FormValidator(validationConfig, item);
-    validator.enableValidation();
+    cardContainer.prepend(cardElement);
   });
-}
-enableValidation(validationConfig);
-
+};
+renderer(initialCards);
+const cardValidator = new FormValidator(validationConfig, cardForm);
+cardValidator.enableValidation();
+const profileValidator = new FormValidator(validationConfig, formElement)
+profileValidator.enableValidation();
 export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keyup', closePopupEsc);
@@ -109,7 +107,12 @@ function cardPopupFormSubmit(evt) {
   evt.preventDefault();
   const cardName = titleInput.value;
   const cardLink = linkInput.value;
-  initialCards.push(cardName,cardLink);
+  initialCards.unshift({name: cardName, link: cardLink});
+  const newCard = initialCards[0];
+  const card = new Card(newCard, '#gallery');
+  const cardElement = card.generateCard();
+
+  cardContainer.prepend(cardElement);
   titleInput.value = "";
   linkInput.value = "";
   closePopup(cardsEl);
