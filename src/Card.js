@@ -1,5 +1,7 @@
-import {openPopup, popupImage, popupImageImg, popupImageText} from "./index.js";
- export default class Card {
+import { popupImage, popupImageImg, popupImageText } from "./utils.js";
+import { openPopup } from "../pages/index.js";
+
+export default class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
@@ -19,6 +21,7 @@ import {openPopup, popupImage, popupImageImg, popupImageText} from "./index.js";
     this._setEventListeners();
 
     this._element.querySelector('.gallery__item-img').src = this._link;
+    this._element.querySelector('.gallery__item-img').alt = this._name;
     this._element.querySelector('.gallery__description-title').textContent = this._name;
 
     return this._element;
@@ -39,12 +42,13 @@ import {openPopup, popupImage, popupImageImg, popupImageText} from "./index.js";
     this._element.querySelector('.gallery__description-img').classList.toggle('gallery__description-img_selected');
   }
   _removeCard() {
-    this._element.closest(".gallery__item");
     this._element.remove();
+    this._element = null;
   }
   _openPopupImage() {
     openPopup(popupImage)
     popupImageImg.src = this._link;
+    popupImageImg.alt = this._name;
     popupImageText.textContent = this._name;
 
   }
