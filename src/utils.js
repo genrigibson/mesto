@@ -15,3 +15,27 @@ export const cardContainer = document.querySelector(".gallery");
 export const popupImage = document.querySelector(".image");
 export const popupImageImg = document.querySelector(".popup__image");
 export const popupImageText = document.querySelector(".popup__text");
+export function openPopup(popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener('keyup', closePopupEsc);
+  popup.addEventListener('click', closePopupMouse);
+}
+export function closePopup(popup) {
+  popup.classList.remove("popup_opened");
+  document.removeEventListener('keyup', closePopupEsc);
+  popup.removeEventListener('click', closePopupMouse);
+}
+
+const closePopupEsc = (event) => {
+  event.preventDefault();
+  const activePopup = document.querySelector('.popup_opened');
+  if (event.key === 'Escape') {
+    closePopup(activePopup);
+  }
+};
+const closePopupMouse = (event) => {
+  const activePopup = document.querySelector('.popup_opened');
+  if (event.target === event.currentTarget) {
+    closePopup(activePopup);
+  }
+};
