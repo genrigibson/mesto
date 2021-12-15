@@ -1,11 +1,13 @@
-import { popupImage, popupImageImg, popupImageText } from "./utils.js";
-import { openPopup } from "./utils.js";
+import { popupImage, popupImageImg, popupImageText } from "../utils/utils.js";
+import { openPopup } from "../utils/utils.js";
+import PopupWithImage from "./PopupWithImage";
 
 export default class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._open = PopupWithImage.open;
   }
   _getTemplate() {
     const cardElement = document
@@ -34,7 +36,7 @@ export default class Card {
       this._removeCard();
     });
     this._element.querySelector('.gallery__item-img').addEventListener('click', () => {
-      this._openPopupImage();
+      this._open();
     });
   }
 
@@ -44,13 +46,6 @@ export default class Card {
   _removeCard() {
     this._element.remove();
     this._element = null;
-  }
-  _openPopupImage() {
-    openPopup(popupImage)
-    popupImageImg.src = this._link;
-    popupImageImg.alt = this._name;
-    popupImageText.textContent = this._name;
-
   }
 
 }
