@@ -1,13 +1,11 @@
-import { popupImage, popupImageImg, popupImageText } from "../utils/utils.js";
-import { openPopup } from "../utils/utils.js";
-import PopupWithImage from "./PopupWithImage";
+import PopupWithImage from "./PopupWithImage.js";
 
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
-    this._open = PopupWithImage.open;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate() {
     const cardElement = document
@@ -21,7 +19,6 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-
     this._element.querySelector('.gallery__item-img').src = this._link;
     this._element.querySelector('.gallery__item-img').alt = this._name;
     this._element.querySelector('.gallery__description-title').textContent = this._name;
@@ -35,11 +32,11 @@ export default class Card {
     this._element.querySelector('.gallery__delete').addEventListener('click', () => {
       this._removeCard();
     });
-    this._element.querySelector('.gallery__item-img').addEventListener('click', () => {
-      this._open();
+    this._element.querySelector('.gallery__item-img').addEventListener('click',
+      () => {
+      this._handleCardClick(this._name, this._link);
     });
   }
-
   _isLiked() {
     this._element.querySelector('.gallery__description-img').classList.toggle('gallery__description-img_selected');
   }
