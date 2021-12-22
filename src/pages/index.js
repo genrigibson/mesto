@@ -38,7 +38,7 @@ const profilePopup = new PopupWithForm({
 profilePopup.setEventListeners();
 const cardPopup = new PopupWithForm({
   handleFormSubmit: (item) => {
-    cardContainer.addItem(createCard(item));
+    cardList.addItem(createCard(item));
     cardPopup.close();
   },
   popupSelector: '.cards',
