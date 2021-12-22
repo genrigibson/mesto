@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = (env, argv) => {
   const styleLoader = argv.mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader'
   const config = {
-    entry: path.resolve(__dirname, 'src', 'scripts', 'index.js'),
+    entry: path.resolve(__dirname, 'src', 'pages', 'index.js'),
     output:
       {
         filename: "main.js",
@@ -15,6 +15,7 @@ module.exports = (env, argv) => {
     devServer:
       {
         static: path.resolve(__dirname, 'dist'),
+        open: true,
         compress:
           true,
         port: 8080

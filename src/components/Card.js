@@ -1,11 +1,13 @@
-import PopupWithImage from "./PopupWithImage.js";
-
 export default class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._imageElement = this._element.querySelector('.gallery__item-img');
+    this._imageText = this._element.querySelector('.gallery__description-title');
+    this._cardLike = this._element.querySelector('.gallery__description-img');
+    this._removeButton = this._element.querySelector('.gallery__delete');
   }
   _getTemplate() {
     const cardElement = document
@@ -19,26 +21,26 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector('.gallery__item-img').src = this._link;
-    this._element.querySelector('.gallery__item-img').alt = this._name;
-    this._element.querySelector('.gallery__description-title').textContent = this._name;
+    this._imageElement.src = this._link;
+    this._imageElement.alt = this._name;
+    this._imageText.textContent = this._name;
 
     return this._element;
   }
   _setEventListeners() {
-    this._element.querySelector('.gallery__description-img').addEventListener('click', () => {
+    this._cardLike.addEventListener('click', () => {
       this._isLiked();
     });
-    this._element.querySelector('.gallery__delete').addEventListener('click', () => {
+    this._removeButton.addEventListener('click', () => {
       this._removeCard();
     });
-    this._element.querySelector('.gallery__item-img').addEventListener('click',
+    this._imageElement.addEventListener('click',
       () => {
       this._handleCardClick(this._name, this._link);
     });
   }
   _isLiked() {
-    this._element.querySelector('.gallery__description-img').classList.toggle('gallery__description-img_selected');
+    this._cardLike.classList.toggle('gallery__description-img_selected');
   }
   _removeCard() {
     this._element.remove();
