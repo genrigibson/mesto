@@ -1,3 +1,4 @@
+import '../pages/index.css'
 import Card from './components/Card.js'
 import FormValidator from "./components/FormValidator.js"
 import { profilePopup as profile, popUpOpenBtn, openCrdBtn, cardsEl, cardForm, closeIcons, titleInput,
@@ -30,6 +31,7 @@ const userInfo = new UserInfo(
 
 const profilePopup = new PopupWithForm({
   handleFormSubmit: (values) => {
+    profileValidator.toggleButtonState();
     profilePopup.close();
     userInfo.setUserInfo(values);
 

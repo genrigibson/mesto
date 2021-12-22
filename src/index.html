@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/index.css">
     <title>Mesto</title>
   </head>
   <body>
     <div class="page">
       <header class="header">
         <img
-          src="images/Vector.png"
+          src="<%=require('./images/Vector.png')%>"
           alt="место_логотип"
           class="header__logo">
       </header>
       <main>
         <section class="profile">
           <img
-            src="images/avatar-photo.png"
+            src="<%=require('./images/avatar-photo.png')%>"
             alt="аватар пользователя"
             class="profile__avatar-img">
           <article class="profile__info">
@@ -94,6 +93,5 @@
         </div>
       </article>
     </template>
-    <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>
