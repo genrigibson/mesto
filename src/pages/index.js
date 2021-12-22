@@ -35,13 +35,15 @@ const profilePopup = new PopupWithForm({
   },
   popupSelector: '.profilepopup',
 });
+profilePopup.setEventListeners();
 const cardPopup = new PopupWithForm({
-  handleFormSubmit: ({name, link} ) => {
-    cardContainer.addItem(createCard({name, link}));
+  handleFormSubmit: (item) => {
+    cardContainer.addItem(createCard(item));
     cardPopup.close();
   },
   popupSelector: '.cards',
 });
+cardPopup.setEventListeners();
 const popupImageZoom = new PopupWithImage('.image', '.popup__text', '.popup__image');
 popupImageZoom.setEventListeners();
 function openCardPopup() {
