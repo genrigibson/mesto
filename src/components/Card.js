@@ -4,10 +4,7 @@ export default class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._imageElement = this._element.querySelector('.gallery__item-img');
-    this._imageText = this._element.querySelector('.gallery__description-title');
-    this._cardLike = this._element.querySelector('.gallery__description-img');
-    this._removeButton = this._element.querySelector('.gallery__delete');
+
   }
   _getTemplate() {
     const cardElement = document
@@ -19,7 +16,12 @@ export default class Card {
     return cardElement;
   }
   generateCard() {
+
     this._element = this._getTemplate();
+    this._imageElement = this._element.querySelector('.gallery__item-img');
+    this._imageText = this._element.querySelector('.gallery__description-title');
+    this._cardLike = this._element.querySelector('.gallery__description-img');
+    this._removeButton = this._element.querySelector('.gallery__delete');
     this._setEventListeners();
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
